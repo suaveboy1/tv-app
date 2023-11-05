@@ -25,16 +25,18 @@ export class TvChannel extends LitElement {
       :host {
         display: inline-flex;
       }
-      .wrapper {
+
+      .course-topic {
         padding: 16px;
-        background-color: #eeeeee;
+        background-color: #c9c9c9;
+    
       }
     `;
   }
   // LitElement rendering template of your element
   render() {
     return html`
-      <div class="wrapper">
+      <div class="course-topic">
         <h3>${this.title}</h3>
         <h4>${this.presenter}</h4>
         <slot></slot>

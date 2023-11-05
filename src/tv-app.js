@@ -8,7 +8,7 @@ export class TvApp extends LitElement {
   // defaults
   constructor() {
     super();
-    this.name = '';
+    this.name = 'James';
     this.source = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
   }
@@ -33,13 +33,37 @@ export class TvApp extends LitElement {
         margin: 16px;
         padding: 16px;
       }
+
+  .course-topics {
+  text-transform: capitalize;
+  font-size: 1.3em;
+  text-align: left;
+  padding: 10px;
+  margin: 1px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: auto;
+      }
+
+  .content-box {
+  font-size: 1.3em;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  }
       `
     ];
   }
-  // LitElement rendering template of your element
+  // LitElement rendering template of your elemen
+  
+
   render() {
     return html`
       <h2>${this.name}</h2>
+      <div class="course-topics">
       ${
         this.listings.map(
           (item) => html`
@@ -51,12 +75,14 @@ export class TvApp extends LitElement {
             </tv-channel>
           `
         )
-      }
-      <div>
-        <!-- video -->
-        <!-- discord / chat - optional -->
-      </div>
-      <!-- dialog -->
+        }
+</div> <!-- end course-topics -->
+
+
+
+
+
+
       <sl-dialog label="Dialog" class="dialog">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
