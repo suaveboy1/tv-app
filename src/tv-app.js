@@ -4,6 +4,8 @@ import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import "./tv-channel.js";
 
+
+
 export class TvApp extends LitElement {
   // defaults
   constructor() {
@@ -11,6 +13,7 @@ export class TvApp extends LitElement {
     this.name = 'James';
     this.source = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
+
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -22,6 +25,7 @@ export class TvApp extends LitElement {
       name: { type: String },
       source: { type: String },
       listings: { type: Array },
+      
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -34,26 +38,54 @@ export class TvApp extends LitElement {
         padding: 16px;
       }
 
-  .course-topics {
-  text-transform: capitalize;
-  font-size: 1.3em;
+  .container {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.course-topics {
   text-align: left;
   padding: 10px;
-  margin: 1px;
+  margin-right: 1px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
   width: auto;
-      }
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
 
-  .content-box {
+.content-box {
   font-size: 1.3em;
   border: 1px solid black;
-  height: 100%;
   width: 100%;
-  display: flex;
-  }
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.active-page {
+  height: 10%;
+  outline: 1px solid black;
+}
+
+.prev-page {
+        height: 50px;
+        width: 90px;
+        outline: 1px solid black;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+}
+.next-page {
+        height: 50px;
+        width: 90px;
+        outline: 1px solid black;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+}
+
       `
     ];
   }
@@ -62,44 +94,45 @@ export class TvApp extends LitElement {
 
   render() {
     return html`
-      <h2>${this.name}</h2>
-      <div class="course-topics">
-      ${
-        this.listings.map(
-          (item) => html`
-            <tv-channel 
-              title="${item.title}"
-              presenter="${item.metadata.author}"
-              @click="${this.itemClick}"
-            >
-            </tv-channel>
-          `
-        )
-        }
-</div> <!-- end course-topics -->
+      <div class="container">
+        <div class="course-topics">
+          ${
+            this.listings.map(
+              (item) => html`
+                <tv-channel 
+                  title="${item.title}"
+                  presenter="${item.metadata.author}"
+                  @click="${this.itemClick}"
+                >
+                </tv-channel>
+              `
+            )
+          }
+        </div> <!-- end course-topics -->
 
+        <div class="content-box">
+          
+          <div class="active-page">
+        </div><!-- end active page -->
+        
 
+        <div class="prev-page">
+        </div><!-- end prev-page -->
 
+        <div class="next-page">
+        </div><!-- end next-page -->
 
+      </div> <!-- end content-box -->
+      </div><!-- end container -->
 
-
-      <sl-dialog label="Dialog" class="dialog">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
-      </sl-dialog>
+  
     `;
   }
 
-  closeDialog(e) {
-    const dialog = this.shadowRoot.querySelector('.dialog');
-    dialog.hide();
-  }
 
-  itemClick(e) {
-    console.log(e.target);
-    const dialog = this.shadowRoot.querySelector('.dialog');
-    dialog.show();
-  }
+  
+
+  
 
   // LitElement life cycle for when any property changes
   updated(changedProperties) {

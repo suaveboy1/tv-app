@@ -27,10 +27,33 @@ export class TvChannel extends LitElement {
       }
 
       .course-topic {
-        padding: 16px;
-        background-color: #c9c9c9;
-    
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        background-color: #d3d3d3;
+        margin-bottom: 10px;
+        line-height: 19px;
+        border-radius: 8px;
+        font-size: 1.5vw;
+        max-width: 200px;
+        width: auto;
       }
+        
+   h3, h4 {
+margin: 10px;
+margin-left: 5px;
+text-align: center;
+
+
+    }
+
+
+
+
+
+
+     
+
     `;
   }
   // LitElement rendering template of your element
@@ -41,8 +64,10 @@ export class TvChannel extends LitElement {
         <h4>${this.presenter}</h4>
         <slot></slot>
       </div>  
+      
       `;
   }
 }
+
 // tell the browser about our tag and class it should run when it sees it
 customElements.define(TvChannel.tag, TvChannel);
