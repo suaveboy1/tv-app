@@ -16,6 +16,14 @@ export class TvApp extends LitElement {
     this.currentPage = 0;
     this.contents = Array(9).fill('');
   }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.contents.forEach((_, index) => {
+      this.loadContent(index);
+    });
+  }
   
 
 
@@ -138,13 +146,7 @@ export class TvApp extends LitElement {
         }
       });
   }
-  connectedCallback() {
-    super.connectedCallback();
 
-    this.contents.forEach((_, index) => {
-      this.loadContent(index);
-    });
-  }
 
   async loadContent(index) {
     const fileName = `/assets/element${index + 1}.html`;
@@ -174,7 +176,7 @@ export class TvApp extends LitElement {
   }
 
   handleNextPageClick() {
-    if (this.currentPage < this.listings.length - 1) {
+    if (this.currentPage < this.listings.length) {
       this.currentPage++;
     }
   }
