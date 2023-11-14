@@ -43,8 +43,6 @@ export class TvChannel extends LitElement {
 margin: 10px;
 margin-left: 5px;
 text-align: center;
-
-
     }
 
 

@@ -2,27 +2,27 @@
   "status": 200,
   "data": {
     "id": "123-123-123-123",
-    "title": "EdTechJokerTV",
-    "author": "EdTechJoker",
-    "description": "A series of talks to learn about JSON and web standard communications",
+    "title": "Introduction to Lit and Web Components",
+    "author": "James Treiman",
+    "description": "A brief introduction to Lit and Web Components.",
     "license": "by-sa",
     "metadata": {},
     "items": [
       {
         "id": "item-1",
         "indent": 0,
-        "location": "this-is-water.html",
+        "location": "element1.html",
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
+        "title": "Introduction",
         "description": "What is water?",
         "metadata": {
-          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
-          "timecode": 45,
-          "author":"",
-          "created": 1697033522,
-          "updated": 1697034021
+          "source": "",
+          "timecode": 0,
+          "author": "",
+          "created": 0,
+          "updated": 0
         }
       },
       
@@ -33,7 +33,7 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
+        "title": "This, is wate",
         "description": "What is water?",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
@@ -51,7 +51,7 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
+        "title": "This, is waterr",
         "description": "What is water?",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
@@ -69,7 +69,7 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
+        "title": "This, is waterq",
         "description": "What is water?",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
