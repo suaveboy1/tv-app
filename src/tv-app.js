@@ -17,7 +17,7 @@ export class TvApp extends LitElement {
     this.selectedCourse = null;
     this.currentPage = 0;
     this.element1Content = '';
-    this.contents = Array(10).fill('');
+    this.contents = Array(9).fill('');
   }
   
 
