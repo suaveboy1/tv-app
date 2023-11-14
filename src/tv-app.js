@@ -11,12 +11,9 @@ export class TvApp extends LitElement {
 
   constructor() {
     super();
-    this.name = 'James';
     this.source = new URL('/assets/channels.json', import.meta.url).href;
-    this.listings = [];
     this.selectedCourse = null;
     this.currentPage = 0;
-    this.element1Content = '';
     this.contents = Array(9).fill('');
   }
   
@@ -123,16 +120,6 @@ export class TvApp extends LitElement {
 
   
 
-  updated(changedProperties) {
-    if (super.updated) {
-      super.updated(changedProperties);
-    }
-    changedProperties.forEach((oldValue, propName) => {
-      if (propName === 'source' && this[propName]) {
-        this.updateSourceData(this[propName]);
-      }
-    });
-  }
 
 
  async updateSourceData(source) {
@@ -170,7 +157,7 @@ export class TvApp extends LitElement {
       this.contents[index] = { htmlContent, title };
       this.requestUpdate();
     } catch (error) {
-      console.error(`Failed to load ${fileName}`, error);
+      console.error(error); 
     }
   }
 
