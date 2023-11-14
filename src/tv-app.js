@@ -3,6 +3,7 @@ import { LitElement, html, css } from 'lit';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import "./tv-channel.js";
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 
 
@@ -15,7 +16,10 @@ export class TvApp extends LitElement {
     this.listings = [];
     this.selectedCourse = null;
     this.currentPage = 0;
+    this.element1Content = '';
+    this.contents = Array(10).fill('');
   }
+  
 
 
   static get tag() {
@@ -30,6 +34,7 @@ export class TvApp extends LitElement {
       listings: { type: Array },
       selectedCourse: { type: Object },
       currentPage: { type: Number },
+      contents: { type: Array }, 
     };
   }
 
@@ -99,33 +104,24 @@ export class TvApp extends LitElement {
     return html`
       <div class="container">
         <div class="course-topics">
-          ${this.listings.map(
-            (item) => html`
-              <tv-channel
-                title="${item.title}"
-                presenter="${item.metadata.author}"
-                @click="${() => this.handleCourseClick(item)}"
-              ></tv-channel>
+          ${this.contents.map(
+            (content, index) => html`
+              <button @click="${() => this.handleCourseClick(index)}">
+                ${content.title || `Topic ${index + 1}`}
+              </button>
             `
           )}
         </div>
-
         <div class="content-box">
-          ${this.selectedCourse
-            ? html`
-                <h3>${this.selectedCourse.title}</h3>
-                <p>${this.selectedCourse.description}</p>
-                <a href="${this.selectedCourse.metadata.source}" target="_blank">Watch video</a>
-              `
-            : ''}
-     
+          ${unsafeHTML(this.contents[this.currentPage].htmlContent)}
         </div>
         <div class="prev-page" @click="${this.handlePrevPageClick}">Previous Page</div>
         <div class="next-page" @click="${this.handleNextPageClick}">Next Page</div>
-      
       </div>
     `;
   }
+
+  
 
   updated(changedProperties) {
     if (super.updated) {
@@ -155,11 +151,32 @@ export class TvApp extends LitElement {
         }
       });
   }
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.contents.forEach((_, index) => {
+      this.loadContent(index);
+    });
+  }
+
+  async loadContent(index) {
+    const fileName = `/assets/element${index + 1}.html`;
+    try {
+      const response = await fetch(fileName);
+      const htmlContent = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, 'text/html');
+      const title = doc.querySelector('h1')?.textContent || `Element ${index + 1}`;
+      this.contents[index] = { htmlContent, title };
+      this.requestUpdate();
+    } catch (error) {
+      console.error(`Failed to load ${fileName}`, error);
+    }
+  }
 
 
-  handleCourseClick(course) {
-    this.selectedCourse = course;
-    this.currentPage = 0; 
+  handleCourseClick(index) {
+    this.currentPage = index; 
   }
 
   
